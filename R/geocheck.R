@@ -7,20 +7,20 @@
 #'   possibly other metadata to identify the geocoded place.
 #'
 #' @export
-geocheck <- function(data, corrected = "corrected") {
+geocheck <- function(data, checked = "checked") {
 
   stopifnot(is.data.frame(data))
 
-  if (!is.null(corrected)) {
+  if (!is.null(checked)) {
     # Check that the column doesn't exist or that if it exists it is logical
-    stopifnot(is.character(corrected),
-              length(corrected) == 1)
-    col_exists <- corrected %in% colnames(data)
-    if (col_exists && !is.logical(data[[corrected]])) {
+    stopifnot(is.character(checked),
+              length(checked) == 1)
+    col_exists <- checked %in% colnames(data)
+    if (col_exists && !is.logical(data[[checked]])) {
       stop(paste0("The column for keeping track of corrections already exists\n",
                   "but it is not logical."))
     } else if (!col_exists) {
-      data[[corrected]] <- NA
+      data[[checked]] <- NA
     }
   }
 
@@ -76,6 +76,15 @@ geocheck <- function(data, corrected = "corrected") {
     })
 
     shiny::observeEvent(input$skip, {
+      if (input$current == nrow(data)) {
+        shiny::updateNumericInput(session, "current", value = 1)
+      } else {
+        shiny::updateNumericInput(session, "current", value = input$current + 1)
+      }
+    })
+
+    shiny::observeEvent(input$mark_correct, {
+      data[[input$current, checked]] <<- TRUE
       if (input$current == nrow(data)) {
         shiny::updateNumericInput(session, "current", value = 1)
       } else {
