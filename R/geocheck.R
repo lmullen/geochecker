@@ -45,12 +45,22 @@ geocheck <- function(data, corrected = "corrected") {
 
   server <- function(input, output, session) {
 
+    get_popup <- function(df) {
+      text <- vapply(names(df), function(n) {
+        paste("<b>", n, ":</b> ", df[[1, n]], collapse = "")
+      }, character(1), USE.NAMES = FALSE)
+      paste(text, collapse = "<br>")
+    }
+
     current_data <- shiny::reactive({data[input$current, ]})
 
     output$map <- leaflet::renderLeaflet({
-      map <- leaflet::leaflet(data = current_data()) %>%
-        leaflet::addMarkers() %>%
-        leaflet::addTiles()
+      df <- current_data()
+      map <- leaflet::leaflet(data = df) %>%
+        leaflet::addTiles() %>%
+        leaflet::addCircleMarkers(color = "red", stroke = FALSE,
+                                  fillOpacity = 0.9) %>%
+        leaflet::addPopups(popup = get_popup(df))
     })
 
     shiny::observeEvent(input$done, {
