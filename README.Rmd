@@ -1,0 +1,36 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+## geochecker
+
+An R package that lets you check the accuracy of geocoded coordinates using a [Shiny gadget](http://shiny.rstudio.com/articles/gadgets.html).
+
+**Author:** [Lincoln Mullen](http://lincolnmullen.com)<br>
+**License:** [MIT](http://opensource.org/licenses/MIT)
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/geochecker)](http://cran.r-project.org/package=geochecker)
+
+
+### Installation
+
+To get the development version from GitHub, use  [devtools](https://github.com/hadley/devtools).
+
+```{r eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("lmullen/geochecker")
+```
+
+### Contributing
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
