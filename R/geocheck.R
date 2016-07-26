@@ -1,10 +1,39 @@
 #' Check geocoded coordinates
 #'
 #' Given a data frame of geocoded coordinates, check their locations on the map
-#' one by one.
+#' one by one. The function will show you each point in the data frame one by
+#' one. You can move forward and backwards through the points with the "next"
+#' and "previous" buttons, which will not save any changes. If a point is
+#' correctly geocoded, then clicking "mark correct" will save that information
+#' and move on to the next point. If a point is incorrect, click on the map to
+#' identify the correct location. When you have identified the correct location,
+#' click "move point" to save the new point. Points which have not been
+#' marked correct are shown in red; points which have been marked correct are
+#' shown in green; points which are being reassigned are shown in blue.
 #'
 #' @param data A data frame containing latitude and longitude coordinates, and
 #'   possibly other metadata to identify the geocoded place.
+#' @param latitude The name of the column containing latitudes. If \code{NULL},
+#'   the function will try to guess the correct column.
+#' @param longitude The name of the column containing longitudes. If
+#'   \code{NULL}, the function will try to guess the correct column.
+#' @param checked The name of the column that keeps track of whether a point has
+#'   been marked as accurately geocoded or not. If this column already exists,
+#'   it must contain logical values. If it does not exist, then it will be
+#'   created. A value of \code{NA} means that the row has not been checked, and
+#'   a value of \code{TRUE} means that it has been marked as accurate.
+#' @param zoom The level of zoom to use when showing each point. A whole number
+#'   between \code{0} and \code{18}.
+#'
+#' @return The original data frame with a new column indicating which values
+#'   have been checked with any corrections to latitudes and longitudes.
+#'
+#' @examples
+#' \dontrun{
+#' geocheck(geocoded_cities)
+#' geocheck(geocoded_cities, zoom = 8,
+#'          latitude = "latitude", longitude = "longitude")
+#' }
 #'
 #' @export
 geocheck <- function(data, latitude = NULL, longitude = NULL,
