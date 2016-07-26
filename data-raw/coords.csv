@@ -1,0 +1,21 @@
+"","lon","lat","type","loctype","address","north","south","east","west","locality","administrative_area_level_1","country","administrative_area_level_2","postal_code","colloquial_area"
+"1",121.473701,31.230416,"locality","approximate","shanghai, china",31.6688967,30.7798012,122.1137989,120.8397067,"Shanghai","Shanghai","China",NA,NA,NA
+"2",67.0099388,24.8614622,"locality","approximate","karachi, pakistan",25.2703106,24.7519801,67.4684518,66.6609567,"Karachi","Sindh","Pakistan","Karachi District",NA,NA
+"3",116.407395,39.904211,"locality","approximate","beijing, china",40.2164962,39.6612714,116.7829835,116.0119343,"Beijing","Beijing","China",NA,NA,NA
+"4",77.2090212,28.6139391,"locality","approximate","new delhi, delhi 110001, india",28.6504799,28.4041,77.34496,77.07301,"New Delhi","Delhi","India",NA,"110001",NA
+"5",3.3792057,6.5243793,"colloquial_area","approximate","lagos, nigeria",6.7027983,6.3936419,3.6967277,3.0982732,NA,"Lagos","Nigeria",NA,NA,"Lagos"
+"6",117.200983,39.084158,"locality","approximate","tianjin, china",39.4468325,38.8032309,117.8118896,116.7791748,"Tianjin","Tianjin","China",NA,NA,NA
+"7",28.9783589,41.0082376,"locality","approximate","istanbul, istanbul, turkey",41.199239,40.8114039,29.4288049,28.595554,"Istanbul","İstanbul","Turkey",NA,NA,NA
+"8",139.6917064,35.6894875,"administrative_area_level_1","approximate","tokyo, japan",35.817813,35.528873,139.910202,139.510574,NA,"Tokyo","Japan",NA,NA,NA
+"9",113.264385,23.12911,"locality","approximate","guangzhou, guangdong, china",23.555094,22.6961015,113.7332153,112.7224731,"Guangzhou","Guangdong","China",NA,NA,NA
+"10",72.8776559,19.0759837,"locality","approximate","mumbai, maharashtra, india",19.2716338,18.8928675,72.9864994,72.7759089,"Mumbai","Maharashtra","India","Mumbai",NA,NA
+"11",37.6173,55.755826,"locality","approximate","moscow, russia",56.0096569,55.489927,37.9456611,37.3193289,"Moscow","Moscow","Russia","gorod Moskva",NA,NA
+"12",-46.6333094,-23.5505199,"locality","approximate","são paulo, state of são paulo, brazil",-23.3566039,-24.0082209,-46.3650845,-46.825514,"São Paulo","State of São Paulo","Brazil","São Paulo",NA,NA
+"13",114.057865,22.543096,"locality","approximate","shenzhen, guangdong, china",22.7809313,22.3293893,114.3553162,113.7524414,"Shenzhen","Guangdong","China",NA,NA,NA
+"14",106.845599,-6.2087634,"colloquial_area","approximate","jakarta, special capital region of jakarta, indonesia",-6.08866,-6.3708331,106.9728249,106.686211,NA,"Special Capital Region of Jakarta","Indonesia",NA,NA,"Jakarta"
+"15",74.3571581,31.5546061,"locality","approximate","lahore, pakistan",31.6332871,31.3342112,74.505512,74.1469001,"Lahore","Punjab","Pakistan","Lahore District",NA,NA
+"16",126.9779692,37.566535,"locality","approximate","seoul, south korea",37.6956,37.4346,127.1823,126.7968,"Seoul",NA,"South Korea",NA,NA,NA
+"17",15.2662931,-4.4419311,"locality","approximate","kinshasa, democratic republic of the congo",-4.2934483,-4.5093665,15.4694101,15.1764985,"Kinshasa","Kinshasa","Democratic Republic of the Congo","Lukunga",NA,NA
+"18",31.2357116,30.0444196,"locality","approximate","cairo, cairo governorate, egypt",30.1106024,30.0083746,31.3019729,31.2149558,"Cairo","Cairo Governorate","Egypt",NA,NA,NA
+"19",-99.133208,19.4326077,"locality","approximate","mexico city, mexico",19.5927572,19.1887101,-98.9604482,-99.3267771,"Mexico City","Mexico City","Mexico",NA,NA,NA
+"20",-77.0427934,-12.046374,"locality","approximate","lima district, peru",-12.0308631,-12.0798251,-77.0020312,-77.0883396,"Lima District","Lima Region","Peru","Lima Province",NA,NA
