@@ -32,10 +32,10 @@ geocheck <- function(data, corrected = "corrected") {
     miniUI::miniButtonBlock(
       shiny::actionButton("previous", "Previous",
                           icon = shiny::icon("arrow-left", lib = "glyphicon")),
+      shiny::actionButton("skip", "Next",
+                          icon = shiny::icon("arrow-right", lib = "glyphicon")),
       shiny::actionButton("move", "Move point",
                           icon = shiny::icon("edit", lib = "glyphicon")),
-      shiny::actionButton("skip", "Skip",
-                          icon = shiny::icon("arrow-right", lib = "glyphicon")),
       shiny::actionButton("mark_correct", "Mark correct",
                           icon = shiny::icon("ok", lib = "glyphicon")),
       shiny::numericInput("current", "Current row", width = 100,
@@ -65,6 +65,22 @@ geocheck <- function(data, corrected = "corrected") {
 
     shiny::observeEvent(input$done, {
       shiny::stopApp(data)
+    })
+
+    shiny::observeEvent(input$previous, {
+      if (input$current == 1) {
+        shiny::updateNumericInput(session, "current", value = nrow(data))
+      } else {
+        shiny::updateNumericInput(session, "current", value = input$current - 1)
+      }
+    })
+
+    shiny::observeEvent(input$skip, {
+      if (input$current == nrow(data)) {
+        shiny::updateNumericInput(session, "current", value = 1)
+      } else {
+        shiny::updateNumericInput(session, "current", value = input$current + 1)
+      }
     })
 
   }
