@@ -21,4 +21,7 @@ Imports:
     miniUI (>= 0.1.1),
     shiny (>= 0.13.2)
 RoxygenNote: 5.0.1
-Suggests: covr
+Suggests:
+    covr,
+    knitr
+
