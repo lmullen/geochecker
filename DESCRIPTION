@@ -3,8 +3,9 @@ Type: Package
 Title: Check Geocoded Coordinates in a Shiny Gadget
 Version: 0.0.0.9000
 Date: 2016-07-26
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Given a data frame of latitude and longitude coordinates which have
+    been geocded from place names or addresses, the Shiny gadget in this package
+    lets you conveniently check the accuracy of the locations.
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
         email = "lincoln@lincolnmullen.com"))
 License: MIT + file LICENSE
@@ -16,6 +17,8 @@ BugReports: https://github.com/lmullen/geochecker/issues
 Depends:
     R (>= 3.1.3)
 Imports:
+    leaflet (>= 1.0.1),
+    miniUI (>= 0.1.1),
     shiny (>= 0.13.2)
 RoxygenNote: 5.0.1
 Suggests: covr
