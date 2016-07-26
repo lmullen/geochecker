@@ -7,7 +7,7 @@ An R package that lets you check the accuracy of geocoded coordinates using a [S
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/geochecker)](http://cran.r-project.org/package=geochecker) [![Travis-CI Build Status](https://travis-ci.org/lmullen/geochecker.svg?branch=master)](https://travis-ci.org/lmullen/geochecker)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/geochecker)](http://cran.r-project.org/package=geochecker) [![Travis-CI Build Status](https://travis-ci.org/lmullen/geochecker.svg?branch=master)](https://travis-ci.org/lmullen/geochecker) [![Coverage Status](https://img.shields.io/codecov/c/github/lmullen/geochecker/master.svg)](https://codecov.io/github/lmullen/geochecker?branch=master)
 
 ### Installation
 
