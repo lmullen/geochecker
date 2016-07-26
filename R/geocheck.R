@@ -7,9 +7,13 @@
 #'   possibly other metadata to identify the geocoded place.
 #'
 #' @export
-geocheck <- function(data, checked = "checked") {
+geocheck <- function(data, latitude = NULL, longitude = NULL,
+                     checked = "checked") {
 
   stopifnot(is.data.frame(data))
+  corrected_point_coords <- NULL
+  if (is.null(latitude)) latitude <- guess_lat(colnames(data))
+  if (is.null(longitude)) longitude <- guess_lng(colnames(data))
 
   if (!is.null(checked)) {
     # Check that the column doesn't exist or that if it exists it is logical
@@ -45,22 +49,23 @@ geocheck <- function(data, checked = "checked") {
 
   server <- function(input, output, session) {
 
-    get_popup <- function(df) {
-      text <- vapply(names(df), function(n) {
-        paste("<b>", n, ":</b> ", df[[1, n]], collapse = "")
-      }, character(1), USE.NAMES = FALSE)
-      paste(text, collapse = "<br>")
-    }
-
     current_data <- shiny::reactive({data[input$current, ]})
 
     output$map <- leaflet::renderLeaflet({
       df <- current_data()
+      lat <- df[1, latitude]
+      lng <- df[1, longitude]
       map <- leaflet::leaflet(data = df) %>%
         leaflet::addTiles() %>%
-        leaflet::addCircleMarkers(color = "red", stroke = FALSE,
-                                  fillOpacity = 0.9) %>%
-        leaflet::addPopups(popup = get_popup(df))
+        leaflet::addCircleMarkers(color = "black", stroke = TRUE,
+                                  weight = 2, opacity = 1,
+                                  fillColor = fill_color(df, checked),
+                                  fillOpacity = 1,
+                                  group = "data_to_check",
+                                  lat = lat, lng = lng) %>%
+        leaflet::addPopups(popup = get_popup(df),
+                           lat = lat, lng = lng,
+                           group = "data_to_check")
     })
 
     shiny::observeEvent(input$done, {
@@ -91,6 +96,43 @@ geocheck <- function(data, checked = "checked") {
         shiny::updateNumericInput(session, "current", value = input$current + 1)
       }
     })
+
+    shiny::observeEvent(input$map_click, {
+      corrected_point_coords <<- input$map_click
+      leaflet::leafletProxy("map") %>%
+        leaflet::clearGroup("corrected_point") %>%
+        leaflet::addCircleMarkers(color = "black", stroke = TRUE,
+                                  weight = 2, opacity = 1,
+                                  fillColor = "blue", fillOpacity = 1,
+                                  lat = input$map_click$lat,
+                                  lng = input$map_click$lng,
+                                  group = "corrected_point")
+    })
+
+    shiny::observeEvent(input$move, {
+      data[input$current, latitude] <<- corrected_point_coords$lat
+      data[input$current, longitude] <<- corrected_point_coords$lng
+      data[input$current, checked] <<- TRUE
+
+      df <- data[input$current, ]
+      lat <- df[1, latitude]
+      lng <- df[1, longitude]
+
+      leaflet::leafletProxy("map") %>%
+        leaflet::clearGroup("corrected_point") %>%
+        leaflet::clearGroup("data_to_check") %>%
+        leaflet::clearPopups() %>%
+        leaflet::addCircleMarkers(color = "black", stroke = TRUE,
+                                  weight = 2, opacity = 1,
+                                  fillColor = fill_color(df, checked),
+                                  fillOpacity = 1,
+                                  group = "data_to_check",
+                                  lat = lat, lng = lng) %>%
+        leaflet::addPopups(popup = get_popup(df),
+                           lat = lat, lng = lng)
+
+    })
+
 
   }
 
