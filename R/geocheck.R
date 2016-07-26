@@ -8,9 +8,11 @@
 #'
 #' @export
 geocheck <- function(data, latitude = NULL, longitude = NULL,
-                     checked = "checked") {
+                     checked = "checked", zoom = NULL) {
 
   stopifnot(is.data.frame(data))
+  if (!is.null(zoom)) stopifnot(0 <= zoom, zoom <= 18)
+
   corrected_point_coords <- NULL
   if (is.null(latitude)) latitude <- guess_lat(colnames(data))
   if (is.null(longitude)) longitude <- guess_lng(colnames(data))
@@ -66,6 +68,11 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
         leaflet::addPopups(popup = get_popup(df),
                            lat = lat, lng = lng,
                            group = "data_to_check")
+      if (!is.null(zoom)) {
+        map <- map %>%
+          leaflet::setView(lng, lat, zoom = zoom)
+      }
+      map
     })
 
     shiny::observeEvent(input$done, {

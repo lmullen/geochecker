@@ -4,7 +4,8 @@
 \alias{geocheck}
 \title{Check geocoded coordinates}
 \usage{
-geocheck(data, latitude = NULL, longitude = NULL, checked = "checked")
+geocheck(data, latitude = NULL, longitude = NULL, checked = "checked",
+  zoom = NULL)
 }
 \arguments{
 \item{data}{A data frame containing latitude and longitude coordinates, and
