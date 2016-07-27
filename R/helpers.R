@@ -15,6 +15,7 @@ fill_color <- function(df, checked) {
 guess_lat <- function(n) {
   possibilities <- n[grep("^(lat|latitude|lats|latitudes)$", n, ignore.case = TRUE)]
   if (length(possibilities == 1)) {
+    message(paste0("Using ", possibilities, " for latitude"))
     possibilities
   } else {
     stop("Could not guess latitude column")
@@ -25,6 +26,7 @@ guess_lng <- function(n) {
   possibilities <- n[grep("^(lon|lng|long|longitude|longs|longitudes)$",
                           n, ignore.case = TRUE)]
   if (length(possibilities == 1)) {
+    message(paste0("Using ", possibilities, " for longitude"))
     possibilities
   } else {
     stop("Could not guess longitude column")
