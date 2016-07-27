@@ -93,8 +93,8 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
 
     output$map <- leaflet::renderLeaflet({
       df <- current_data()
-      lat <- df[1, latitude]
-      lng <- df[1, longitude]
+      lat <- df[[1, latitude]]
+      lng <- df[[1, longitude]]
       map <- leaflet::leaflet(data = df) %>%
         leaflet::addProviderTiles(tile_provider) %>%
         leaflet::addCircleMarkers(color = "black", stroke = TRUE,
