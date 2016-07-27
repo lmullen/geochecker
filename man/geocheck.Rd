@@ -5,7 +5,7 @@
 \title{Check geocoded coordinates}
 \usage{
 geocheck(data, latitude = NULL, longitude = NULL, checked = "checked",
-  zoom = NULL, tile_provider = "Esri.WorldStreetMap")
+  zoom = NULL, popup_cols = NULL, tile_provider = "Esri.WorldStreetMap")
 }
 \arguments{
 \item{data}{A data frame containing latitude and longitude coordinates, and
@@ -26,10 +26,14 @@ a value of \code{TRUE} means that it has been marked as accurate.}
 \item{zoom}{The level of zoom to use when showing each point. A whole number
 between \code{0} and \code{18}.}
 
+\item{popup_cols}{A character vector of column names. Values from these
+columns will be displayed in the popup for each point. If \code{NULL}, all
+columns will be used.}
+
 \item{tile_provider}{The code for a tile provider. See the leaflet package's
 \code{\link[leaflet]{addProviderTiles}} function or the
 \href{http://leaflet-extras.github.io/leaflet-providers/preview/}{Leaflet-providers
-preview}.}
+ preview}.}
 }
 \value{
 The original data frame with a new column indicating which values

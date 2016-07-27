@@ -24,10 +24,13 @@
 #'   a value of \code{TRUE} means that it has been marked as accurate.
 #' @param zoom The level of zoom to use when showing each point. A whole number
 #'   between \code{0} and \code{18}.
+#' @param popup_cols A character vector of column names. Values from these
+#'   columns will be displayed in the popup for each point. If \code{NULL}, all
+#'   columns will be used.
 #' @param tile_provider The code for a tile provider. See the leaflet package's
 #'   \code{\link[leaflet]{addProviderTiles}} function or the
 #'   \href{http://leaflet-extras.github.io/leaflet-providers/preview/}{Leaflet-providers
-#'   preview}.
+#'    preview}.
 #'
 #' @return The original data frame with a new column indicating which values
 #'   have been checked with any corrections to latitudes and longitudes.
@@ -42,10 +45,16 @@
 #' @export
 geocheck <- function(data, latitude = NULL, longitude = NULL,
                      checked = "checked", zoom = NULL,
-                     tile_provider = "Esri.WorldStreetMap") {
+                     popup_cols = NULL, tile_provider = "Esri.WorldStreetMap") {
 
   stopifnot(is.data.frame(data))
+
   if (!is.null(zoom)) stopifnot(0 <= zoom, zoom <= 18)
+
+  badnames <- popup_cols[!popup_cols %in% colnames(data)]
+  if (length(badnames >= 1))
+    warning("These columns are not in that data frame: ",
+            paste(badnames, collapse = ", "))
 
   corrected_point_coords <- NULL
   if (is.null(latitude)) latitude <- guess_lat(colnames(data))
@@ -103,7 +112,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
                                   fillOpacity = 0.5,
                                   group = "data_to_check",
                                   lat = lat, lng = lng) %>%
-        leaflet::addPopups(popup = get_popup(df),
+        leaflet::addPopups(popup = get_popup(df, popup_cols),
                            lat = lat, lng = lng,
                            group = "data_to_check")
       if (!is.null(zoom)) {
@@ -180,7 +189,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
                                   fillOpacity = 0.5,
                                   group = "data_to_check",
                                   lat = lat, lng = lng) %>%
-        leaflet::addPopups(popup = get_popup(df),
+        leaflet::addPopups(popup = get_popup(df, popup_cols),
                            lat = lat, lng = lng)
 
     })

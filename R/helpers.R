@@ -1,6 +1,8 @@
 # Get all columns of a data frame into a Leaflet popup
-get_popup <- function(df) {
-  text <- vapply(names(df), function(n) {
+get_popup <- function(df, popup_cols) {
+  columns <- colnames(df)
+  if (!is.null(popup_cols)) columns <- columns[columns %in% popup_cols]
+  text <- vapply(columns, function(n) {
     paste("<b>", n, ":</b> ", df[[1, n]], collapse = "")
   }, character(1), USE.NAMES = FALSE)
   paste(text, collapse = "<br>")
