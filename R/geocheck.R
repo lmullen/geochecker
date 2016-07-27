@@ -51,17 +51,15 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
   if (is.null(latitude)) latitude <- guess_lat(colnames(data))
   if (is.null(longitude)) longitude <- guess_lng(colnames(data))
 
-  if (!is.null(checked)) {
-    # Check that the column doesn't exist or that if it exists it is logical
-    stopifnot(is.character(checked),
-              length(checked) == 1)
-    col_exists <- checked %in% colnames(data)
-    if (col_exists && !is.logical(data[[checked]])) {
-      stop(paste0("The column for keeping track of corrections already exists\n",
-                  "but it is not logical."))
-    } else if (!col_exists) {
-      data[[checked]] <- NA
-    }
+  # Check that the column doesn't exist or that if it exists it is logical
+  stopifnot(is.character(checked),
+            length(checked) == 1)
+  col_exists <- checked %in% colnames(data)
+  if (col_exists && !is.logical(data[[checked]])) {
+    stop(paste0("The column for keeping track of corrections already exists\n",
+                "but it is not logical."))
+  } else if (!col_exists) {
+    data[[checked]] <- NA
   }
 
   ui <- miniUI::miniPage(
