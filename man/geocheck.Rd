@@ -5,7 +5,7 @@
 \title{Check geocoded coordinates}
 \usage{
 geocheck(data, latitude = NULL, longitude = NULL, checked = "checked",
-  zoom = NULL)
+  zoom = NULL, tile_provider = "Esri.WorldStreetMap")
 }
 \arguments{
 \item{data}{A data frame containing latitude and longitude coordinates, and
@@ -25,6 +25,11 @@ a value of \code{TRUE} means that it has been marked as accurate.}
 
 \item{zoom}{The level of zoom to use when showing each point. A whole number
 between \code{0} and \code{18}.}
+
+\item{tile_provider}{The code for a tile provider. See the leaflet package's
+\code{\link[leaflet]{addProviderTiles}} function or the
+\href{http://leaflet-extras.github.io/leaflet-providers/preview/}{Leaflet-providers
+preview}.}
 }
 \value{
 The original data frame with a new column indicating which values
@@ -38,9 +43,9 @@ and "previous" buttons, which will not save any changes. If a point is
 correctly geocoded, then clicking "mark correct" will save that information
 and move on to the next point. If a point is incorrect, click on the map to
 identify the correct location. When you have identified the correct location,
-click "move point" to save the new point. Points which have not been
-marked correct are shown in red; points which have been marked correct are
-shown in green; points which are being reassigned are shown in blue.
+click "move point" to save the new point. Points which have not been marked
+correct are shown in red; points which have been marked correct are shown in
+green; points which are being reassigned are shown in blue.
 }
 \examples{
 \dontrun{

@@ -7,9 +7,9 @@
 #' correctly geocoded, then clicking "mark correct" will save that information
 #' and move on to the next point. If a point is incorrect, click on the map to
 #' identify the correct location. When you have identified the correct location,
-#' click "move point" to save the new point. Points which have not been
-#' marked correct are shown in red; points which have been marked correct are
-#' shown in green; points which are being reassigned are shown in blue.
+#' click "move point" to save the new point. Points which have not been marked
+#' correct are shown in red; points which have been marked correct are shown in
+#' green; points which are being reassigned are shown in blue.
 #'
 #' @param data A data frame containing latitude and longitude coordinates, and
 #'   possibly other metadata to identify the geocoded place.
@@ -24,6 +24,10 @@
 #'   a value of \code{TRUE} means that it has been marked as accurate.
 #' @param zoom The level of zoom to use when showing each point. A whole number
 #'   between \code{0} and \code{18}.
+#' @param tile_provider The code for a tile provider. See the leaflet package's
+#'   \code{\link[leaflet]{addProviderTiles}} function or the
+#'   \href{http://leaflet-extras.github.io/leaflet-providers/preview/}{Leaflet-providers
+#'   preview}.
 #'
 #' @return The original data frame with a new column indicating which values
 #'   have been checked with any corrections to latitudes and longitudes.
@@ -37,7 +41,8 @@
 #'
 #' @export
 geocheck <- function(data, latitude = NULL, longitude = NULL,
-                     checked = "checked", zoom = NULL) {
+                     checked = "checked", zoom = NULL,
+                     tile_provider = "Esri.WorldStreetMap") {
 
   stopifnot(is.data.frame(data))
   if (!is.null(zoom)) stopifnot(0 <= zoom, zoom <= 18)
@@ -91,7 +96,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
       lat <- df[1, latitude]
       lng <- df[1, longitude]
       map <- leaflet::leaflet(data = df) %>%
-        leaflet::addTiles() %>%
+        leaflet::addProviderTiles(tile_provider) %>%
         leaflet::addCircleMarkers(color = "black", stroke = TRUE,
                                   weight = 2, opacity = 1,
                                   fillColor = fill_color(df, checked),
