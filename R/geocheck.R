@@ -60,6 +60,9 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
   }
 
   ui <- miniUI::miniPage(
+    shiny::tags$head(shiny::tags$style(shiny::HTML(
+      ".form-group {margin: 6px;}"
+    ))),
     miniUI::gadgetTitleBar("Geochecker", left = NULL),
     miniUI::miniContentPanel(padding = 0, scrollable = FALSE,
       leaflet::leafletOutput("map", height = "100%")
@@ -73,7 +76,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
                           icon = shiny::icon("edit", lib = "glyphicon")),
       shiny::actionButton("mark_correct", "Mark correct",
                           icon = shiny::icon("ok", lib = "glyphicon")),
-      shiny::numericInput("current", "Current row", width = 100,
+      shiny::numericInput("current", NULL, width = 80,
                           value = 1, step = 1, min = 1, max = nrow(data))
     )
   )
