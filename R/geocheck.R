@@ -63,6 +63,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
     shiny::tags$head(shiny::tags$style(shiny::HTML(
       ".form-group {margin: 6px;}"
     ))),
+    shiny::tags$script(type = "text/javascript", "$(document).ready(function() { Shiny.addCustomMessageHandler('showalert', function(message) { alert(message); }); });"),
     miniUI::gadgetTitleBar("Geochecker", left = NULL),
     miniUI::miniContentPanel(padding = 0, scrollable = FALSE,
       leaflet::leafletOutput("map", height = "100%")
@@ -112,6 +113,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
     })
 
     shiny::observeEvent(input$previous, {
+      corrected_point_coords <<- NULL
       if (input$current == 1) {
         shiny::updateNumericInput(session, "current", value = nrow(data))
       } else {
@@ -120,6 +122,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
     })
 
     shiny::observeEvent(input$skip, {
+      corrected_point_coords <<- NULL
       if (input$current == nrow(data)) {
         shiny::updateNumericInput(session, "current", value = 1)
       } else {
@@ -128,6 +131,7 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
     })
 
     shiny::observeEvent(input$mark_correct, {
+      corrected_point_coords <<- NULL
       data[[input$current, checked]] <<- TRUE
       if (input$current == nrow(data)) {
         shiny::updateNumericInput(session, "current", value = 1)
@@ -149,6 +153,10 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
     })
 
     shiny::observeEvent(input$move, {
+      if (is.null(corrected_point_coords))
+        session$sendCustomMessage(type = "showalert", "Click on the map to set the correct location before moving the point.")
+      shiny::req(!is.null(corrected_point_coords))
+
       data[input$current, latitude] <<- corrected_point_coords$lat
       data[input$current, longitude] <<- corrected_point_coords$lng
       data[input$current, checked] <<- TRUE
@@ -171,7 +179,6 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
                            lat = lat, lng = lng)
 
     })
-
 
   }
 
