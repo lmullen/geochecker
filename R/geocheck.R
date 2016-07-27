@@ -66,7 +66,9 @@ geocheck <- function(data, latitude = NULL, longitude = NULL,
 
   ui <- miniUI::miniPage(
     shiny::tags$head(shiny::tags$style(shiny::HTML(
-      ".form-group {margin: 6px;}"
+      ".form-group {margin: 6px;}
+       .leaflet-popup-content-wrapper,
+       .leaflet-popup-tip {background: rgba(255,255,255,0.6); box-shadow: none;}"
     ))),
     shiny::tags$script(type = "text/javascript", "$(document).ready(function() { Shiny.addCustomMessageHandler('showalert', function(message) { alert(message); }); });"),
     miniUI::gadgetTitleBar("Geochecker", left = NULL),
