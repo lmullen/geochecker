@@ -21,8 +21,6 @@ An R package that lets you check the accuracy of geocoded coordinates using a [S
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/geochecker)](http://cran.r-project.org/package=geochecker)
 [![Travis-CI Build Status](https://travis-ci.org/lmullen/geochecker.svg?branch=master)](https://travis-ci.org/lmullen/geochecker)
-[![Coverage Status](https://img.shields.io/codecov/c/github/lmullen/geochecker/master.svg)](https://codecov.io/github/lmullen/geochecker?branch=master)
-
 
 ### Installation
 
